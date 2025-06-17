@@ -1,0 +1,43 @@
+{
+  "name": "ali-construction",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Unified fullstack construction project management app",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@azure/msal-react": "^3.0.12",
+    "@supabase/supabase-js": "^2.50.0",
+    "@types/node": "^20.0.0",
+    "@types/react": "^18.2.0",
+    "@types/react-dom": "^18.2.0",
+    "autoprefixer": "^10.0.0",
+    "axios": "^1.10.0",
+    "chart.js": "^4.4.0",
+    "clsx": "^2.1.0",
+    "framer-motion": "^12.18.1",
+    "lucide-react": "^0.300.0",
+    "next": "14.0.0",
+    "postcss": "^8.0.0",
+    "react": "^18.2.0",
+    "react-chartjs-2": "^5.2.0",
+    "react-dom": "^18.2.0",
+    "tailwind-merge": "^2.2.1",
+    "tailwindcss": "^3.3.0",
+    "typescript": "^5.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/react": "^18.3.5",
+    "@types/react-dom": "^18.3.0",
+    "eslint": "^9.9.1",
+    "eslint-config-next": "^15.0.0",
+    "postcss": "^8.4.35",
+    "tailwindcss": "^3.4.1",
+    "typescript": "^5.5.3"
+  }
+}
