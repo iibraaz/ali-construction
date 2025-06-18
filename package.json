@@ -2,45 +2,28 @@
   "name": "ali-construction",
   "private": true,
   "version": "0.1.0",
-  "description": "Unified fullstack construction project management app",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "test": "jest",
-    "test:watch": "jest --watch"
+    "lint": "next lint"
   },
   "dependencies": {
     "@clerk/nextjs": "^4.29.0",
-    "@hookform/resolvers": "^3.3.2",
-    "@supabase/supabase-js": "^2.50.0",
-    "clsx": "^2.1.0",
-    "framer-motion": "^12.18.1",
-    "lucide-react": "^0.300.0",
-    "next": "14.2.25",
-    "openai": "^4.20.0",
+    "next": "14.0.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-hook-form": "^7.48.2",
-    "react-hot-toast": "^2.4.1",
-    "tailwind-merge": "^2.2.1",
-    "typescript": "^5.0.0",
-    "zod": "^3.22.4",
-    "zustand": "^4.4.7"
+    "react-hot-toast": "^2.4.1"
   },
   "devDependencies": {
-    "@types/jest": "^29.5.8",
     "@types/node": "^20.0.0",
-    "@types/react": "^18.3.5",
-    "@types/react-dom": "^18.3.0",
+    "@types/react": "^18.2.0",
+    "@types/react-dom": "^18.2.0",
     "autoprefixer": "^10.0.0",
-    "eslint": "^9.9.1",
-    "eslint-config-next": "^15.0.0",
-    "jest": "^29.7.0",
-    "jest-environment-jsdom": "^29.7.0",
+    "eslint": "^8.0.0",
+    "eslint-config-next": "14.0.4",
     "postcss": "^8.4.35",
     "tailwindcss": "^3.4.1",
-    "typescript": "^5.5.3"
+    "typescript": "^5.0.0"
   }
 }

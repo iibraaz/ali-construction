@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import { auth } from '@clerk/nextjs'
 import { redirect } from 'next/navigation'
 
@@ -21,19 +22,17 @@ export default function HomePage() {
         </div>
         
         <div className="space-y-4">
-          <a 
-            href="/sign-up" 
-            className="block w-full bg-blue-600 text-white py-2 px-4 rounded-lg text-center hover:bg-blue-700 transition-colors"
-          >
-            Get Started
-          </a>
+          <Link href="/sign-up" className="block">
+            <button className="w-full bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors">
+              Get Started
+            </button>
+          </Link>
           
-          <a 
-            href="/sign-in" 
-            className="block w-full border border-gray-300 text-gray-700 py-2 px-4 rounded-lg text-center hover:bg-gray-50 transition-colors"
-          >
-            Sign In
-          </a>
+          <Link href="/sign-in" className="block">
+            <button className="w-full border border-gray-300 text-gray-700 py-2 px-4 rounded-lg hover:bg-gray-50 transition-colors">
+              Sign In
+            </button>
+          </Link>
         </div>
         
         <div className="mt-8 pt-6 border-t border-gray-200">

@@ -1,9 +1,8 @@
-import type { Metadata } from 'next'
 import { ClerkProvider } from '@clerk/nextjs'
 import { Toaster } from 'react-hot-toast'
 import './globals.css'
 
-export const metadata: Metadata = {
+export const metadata = {
   title: 'Ali Construction - Project Management',
   description: 'Modern construction project management application',
 }
