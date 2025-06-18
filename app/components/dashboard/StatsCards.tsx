@@ -1,6 +1,7 @@
 'use client'
 
 import { Card, CardContent } from '@/app/components/ui/Card'
+import LoadingSpinner from '@/app/components/ui/LoadingSpinner'
 import { useDashboard } from '@/lib/hooks/useDashboard'
 import { FolderOpen, Activity, CheckCircle, AlertCircle } from 'lucide-react'
 
@@ -11,9 +12,9 @@ export default function StatsCards() {
     return (
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         {[...Array(4)].map((_, i) => (
-          <Card key={i} className="animate-pulse">
-            <CardContent className="p-6">
-              <div className="h-16 bg-gray-200 rounded"></div>
+          <Card key={i}>
+            <CardContent className="p-6 flex justify-center">
+              <LoadingSpinner size="lg" />
             </CardContent>
           </Card>
         ))}

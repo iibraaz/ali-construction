@@ -5,6 +5,37 @@ import { useProjectsStore } from '@/lib/store'
 import { showToast } from '@/app/components/ui/Toast'
 import type { Project, CreateProject, UpdateProject } from '@/types'
 
+// Mock data for development
+const mockProjects: Project[] = [
+  {
+    id: '1',
+    name: 'Downtown Office Building',
+    description: 'Modern 12-story office complex with sustainable features',
+    status: 'active',
+    user_id: 'user-1',
+    created_at: new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString(),
+    updated_at: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000).toISOString(),
+  },
+  {
+    id: '2',
+    name: 'Residential Complex Phase 1',
+    description: '50-unit residential development with amenities',
+    status: 'planning',
+    user_id: 'user-1',
+    created_at: new Date(Date.now() - 15 * 24 * 60 * 60 * 1000).toISOString(),
+    updated_at: new Date(Date.now() - 15 * 24 * 60 * 60 * 1000).toISOString(),
+  },
+  {
+    id: '3',
+    name: 'Highway Bridge Renovation',
+    description: 'Complete structural renovation of the Main St bridge',
+    status: 'completed',
+    user_id: 'user-1',
+    created_at: new Date(Date.now() - 90 * 24 * 60 * 60 * 1000).toISOString(),
+    updated_at: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000).toISOString(),
+  },
+]
+
 export function useProjects() {
   const {
     projects,
@@ -21,14 +52,9 @@ export function useProjects() {
   const fetchProjects = async () => {
     setLoading(true)
     try {
-      const response = await fetch('/api/projects')
-      const result = await response.json()
-      
-      if (result.success) {
-        setProjects(result.data)
-      } else {
-        throw new Error(result.error)
-      }
+      // Simulate API call with mock data
+      await new Promise(resolve => setTimeout(resolve, 800))
+      setProjects(mockProjects)
     } catch (error) {
       console.error('Failed to fetch projects:', error)
       showToast.error('Failed to load projects')
@@ -41,22 +67,21 @@ export function useProjects() {
     const loadingToast = showToast.loading('Creating project...')
     
     try {
-      const response = await fetch('/api/projects', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
-      })
+      // Simulate API call
+      await new Promise(resolve => setTimeout(resolve, 1000))
       
-      const result = await response.json()
-      
-      if (result.success) {
-        addProject(result.data)
-        showToast.dismiss(loadingToast)
-        showToast.success('Project created successfully!')
-        return result.data
-      } else {
-        throw new Error(result.error)
+      const newProject: Project = {
+        id: Math.random().toString(36).substring(7),
+        ...data,
+        user_id: 'user-1',
+        created_at: new Date().toISOString(),
+        updated_at: new Date().toISOString(),
       }
+      
+      addProject(newProject)
+      showToast.dismiss(loadingToast)
+      showToast.success('Project created successfully!')
+      return newProject
     } catch (error) {
       showToast.dismiss(loadingToast)
       showToast.error('Failed to create project')
@@ -69,22 +94,18 @@ export function useProjects() {
     const loadingToast = showToast.loading('Updating project...')
     
     try {
-      const response = await fetch(`/api/projects/${id}`, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
-      })
+      // Simulate API call
+      await new Promise(resolve => setTimeout(resolve, 800))
       
-      const result = await response.json()
-      
-      if (result.success) {
-        updateProject(id, result.data)
-        showToast.dismiss(loadingToast)
-        showToast.success('Project updated successfully!')
-        return result.data
-      } else {
-        throw new Error(result.error)
+      const updatedProject = {
+        ...data,
+        updated_at: new Date().toISOString(),
       }
+      
+      updateProject(id, updatedProject)
+      showToast.dismiss(loadingToast)
+      showToast.success('Project updated successfully!')
+      return updatedProject
     } catch (error) {
       showToast.dismiss(loadingToast)
       showToast.error('Failed to update project')
@@ -97,19 +118,12 @@ export function useProjects() {
     const loadingToast = showToast.loading('Deleting project...')
     
     try {
-      const response = await fetch(`/api/projects/${id}`, {
-        method: 'DELETE',
-      })
+      // Simulate API call
+      await new Promise(resolve => setTimeout(resolve, 600))
       
-      const result = await response.json()
-      
-      if (result.success) {
-        deleteProject(id)
-        showToast.dismiss(loadingToast)
-        showToast.success('Project deleted successfully!')
-      } else {
-        throw new Error(result.error)
-      }
+      deleteProject(id)
+      showToast.dismiss(loadingToast)
+      showToast.success('Project deleted successfully!')
     } catch (error) {
       showToast.dismiss(loadingToast)
       showToast.error('Failed to delete project')
@@ -120,14 +134,13 @@ export function useProjects() {
 
   const fetchProject = async (id: string) => {
     try {
-      const response = await fetch(`/api/projects/${id}`)
-      const result = await response.json()
-      
-      if (result.success) {
-        setCurrentProject(result.data)
-        return result.data
+      // Find project in mock data
+      const project = mockProjects.find(p => p.id === id)
+      if (project) {
+        setCurrentProject(project)
+        return project
       } else {
-        throw new Error(result.error)
+        throw new Error('Project not found')
       }
     } catch (error) {
       console.error('Failed to fetch project:', error)

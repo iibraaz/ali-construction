@@ -1,6 +1,7 @@
 'use client'
 
 import { Card, CardContent } from '@/app/components/ui/Card'
+import LoadingSpinner from '@/app/components/ui/LoadingSpinner'
 import { useDashboard } from '@/lib/hooks/useDashboard'
 import { formatRelativeTime } from '@/lib/utils'
 import { 
@@ -30,18 +31,8 @@ export default function RecentActivity() {
   if (isLoading) {
     return (
       <Card>
-        <CardContent className="p-6">
-          <div className="animate-pulse space-y-4">
-            {[...Array(3)].map((_, i) => (
-              <div key={i} className="flex items-center space-x-3">
-                <div className="w-8 h-8 bg-gray-200 rounded-lg"></div>
-                <div className="flex-1">
-                  <div className="h-4 bg-gray-200 rounded w-3/4 mb-2"></div>
-                  <div className="h-3 bg-gray-200 rounded w-1/2"></div>
-                </div>
-              </div>
-            ))}
-          </div>
+        <CardContent className="p-6 flex justify-center">
+          <LoadingSpinner size="lg" />
         </CardContent>
       </Card>
     )

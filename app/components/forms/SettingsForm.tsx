@@ -5,18 +5,26 @@ import { Card, CardHeader, CardTitle, CardContent } from '@/app/components/ui/Ca
 import Button from '@/app/components/ui/Button'
 import Input from '@/app/components/ui/Input'
 import FormField from '@/app/components/ui/FormField'
+import { useAuth } from '@/lib/hooks/useAuth'
+import { showToast } from '@/app/components/ui/Toast'
 
 export default function SettingsForm() {
   const [isLoading, setIsLoading] = useState(false)
+  const { user } = useAuth()
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsLoading(true)
     
-    // TODO: Implement settings update logic
-    await new Promise(resolve => setTimeout(resolve, 1000))
-    
-    setIsLoading(false)
+    try {
+      // Simulate API call
+      await new Promise(resolve => setTimeout(resolve, 1000))
+      showToast.success('Settings updated successfully!')
+    } catch (error) {
+      showToast.error('Failed to update settings')
+    } finally {
+      setIsLoading(false)
+    }
   }
 
   return (
@@ -31,7 +39,7 @@ export default function SettingsForm() {
               <Input
                 label="Display Name"
                 placeholder="Enter your display name"
-                defaultValue="John Doe"
+                defaultValue={user?.name || ''}
               />
             </FormField>
 
@@ -40,7 +48,7 @@ export default function SettingsForm() {
                 label="Email"
                 type="email"
                 placeholder="Enter your email"
-                defaultValue="john@example.com"
+                defaultValue={user?.email || ''}
                 disabled
               />
             </FormField>

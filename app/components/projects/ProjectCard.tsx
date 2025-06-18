@@ -3,9 +3,10 @@
 import { useState, useEffect } from 'react'
 import { Card, CardHeader, CardTitle, CardContent } from '@/app/components/ui/Card'
 import Button from '@/app/components/ui/Button'
+import LoadingSpinner from '@/app/components/ui/LoadingSpinner'
 import { useProjects } from '@/lib/hooks/useProjects'
 import { formatDate } from '@/lib/utils'
-import { Calendar, Users, MoreHorizontal } from 'lucide-react'
+import { Calendar, MoreHorizontal } from 'lucide-react'
 import type { Project } from '@/types'
 
 interface ProjectCardProps {
@@ -30,10 +31,14 @@ const statusLabels = {
 export default function ProjectCard({ project: initialProject, projectId }: ProjectCardProps) {
   const { currentProject, fetchProject } = useProjects()
   const [project, setProject] = useState<Project | null>(initialProject || null)
+  const [isLoading, setIsLoading] = useState(false)
 
   useEffect(() => {
     if (projectId && !initialProject) {
-      fetchProject(projectId).then(setProject)
+      setIsLoading(true)
+      fetchProject(projectId)
+        .then(setProject)
+        .finally(() => setIsLoading(false))
     } else if (initialProject) {
       setProject(initialProject)
     } else if (currentProject) {
@@ -41,15 +46,21 @@ export default function ProjectCard({ project: initialProject, projectId }: Proj
     }
   }, [projectId, initialProject, currentProject, fetchProject])
 
+  if (isLoading) {
+    return (
+      <Card>
+        <CardContent className="p-6 flex justify-center">
+          <LoadingSpinner size="lg" />
+        </CardContent>
+      </Card>
+    )
+  }
+
   if (!project) {
     return (
       <Card>
         <CardContent className="p-6">
-          <div className="animate-pulse">
-            <div className="h-6 bg-gray-200 rounded w-3/4 mb-4"></div>
-            <div className="h-4 bg-gray-200 rounded w-full mb-2"></div>
-            <div className="h-4 bg-gray-200 rounded w-2/3"></div>
-          </div>
+          <p className="text-gray-500 text-center">Project not found</p>
         </CardContent>
       </Card>
     )

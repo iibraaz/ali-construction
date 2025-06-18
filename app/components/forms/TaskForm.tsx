@@ -6,6 +6,7 @@ import { CreateTaskSchema, type CreateTask } from '@/types'
 import Button from '@/app/components/ui/Button'
 import Input from '@/app/components/ui/Input'
 import FormField from '@/app/components/ui/FormField'
+import { useProjects } from '@/lib/hooks/useProjects'
 
 interface TaskFormProps {
   onSubmit: (data: CreateTask) => Promise<void>
@@ -22,6 +23,8 @@ export default function TaskForm({
   isLoading = false,
   projectId 
 }: TaskFormProps) {
+  const { projects } = useProjects()
+  
   const {
     register,
     handleSubmit,
@@ -65,6 +68,25 @@ export default function TaskForm({
           {...register('description')}
         />
       </FormField>
+
+      {!projectId && (
+        <FormField error={errors.project_id?.message}>
+          <label className="block text-sm font-medium text-gray-700 mb-1">
+            Project
+          </label>
+          <select
+            className="block w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+            {...register('project_id')}
+          >
+            <option value="">Select a project</option>
+            {projects.map((project) => (
+              <option key={project.id} value={project.id}>
+                {project.name}
+              </option>
+            ))}
+          </select>
+        </FormField>
+      )}
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <FormField error={errors.status?.message}>

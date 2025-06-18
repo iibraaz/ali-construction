@@ -1,11 +1,7 @@
-import { Metadata } from 'next'
+'use client'
+
 import AppLayout from '@/app/components/layout/AppLayout'
 import SettingsForm from '@/app/components/forms/SettingsForm'
-
-export const metadata: Metadata = {
-  title: 'Settings - Ali Construction',
-  description: 'Manage your account settings',
-}
 
 export default function SettingsPage() {
   return (

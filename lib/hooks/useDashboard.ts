@@ -10,8 +10,7 @@ export function useDashboard() {
   const fetchDashboardStats = async () => {
     setLoading(true)
     try {
-      // TODO: Create dashboard stats API endpoint
-      // For now, we'll simulate the data
+      // Mock data for development - replace with real API call
       const mockStats: DashboardStats = {
         totalProjects: 12,
         activeProjects: 8,
@@ -45,6 +44,8 @@ export function useDashboard() {
         ],
       }
 
+      // Simulate API delay
+      await new Promise(resolve => setTimeout(resolve, 1000))
       setStats(mockStats)
     } catch (error) {
       console.error('Failed to fetch dashboard stats:', error)
