@@ -1,7 +1,5 @@
-import Link from 'next/link'
 import { auth } from '@clerk/nextjs'
 import { redirect } from 'next/navigation'
-import Button from '@/app/components/ui/Button'
 
 export default function HomePage() {
   const { userId } = auth()
@@ -23,17 +21,19 @@ export default function HomePage() {
         </div>
         
         <div className="space-y-4">
-          <Link href="/sign-up" className="block">
-            <Button className="w-full">
-              Get Started
-            </Button>
-          </Link>
+          <a 
+            href="/sign-up" 
+            className="block w-full bg-blue-600 text-white py-2 px-4 rounded-lg text-center hover:bg-blue-700 transition-colors"
+          >
+            Get Started
+          </a>
           
-          <Link href="/sign-in" className="block">
-            <Button variant="outline" className="w-full">
-              Sign In
-            </Button>
-          </Link>
+          <a 
+            href="/sign-in" 
+            className="block w-full border border-gray-300 text-gray-700 py-2 px-4 rounded-lg text-center hover:bg-gray-50 transition-colors"
+          >
+            Sign In
+          </a>
         </div>
         
         <div className="mt-8 pt-6 border-t border-gray-200">

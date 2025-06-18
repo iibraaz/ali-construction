@@ -16,7 +16,7 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en">
-        <body className="min-h-screen bg-background font-sans antialiased">
+        <body className="min-h-screen bg-gray-50 font-sans antialiased">
           {children}
           <Toaster 
             position="top-right"
