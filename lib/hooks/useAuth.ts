@@ -16,7 +16,7 @@ export function useAuth() {
         const userData = {
           id: clerkUser.id,
           email: clerkUser.emailAddresses[0]?.emailAddress || '',
-          name: `${clerkUser.firstName || ''} ${clerkUser.lastName || ''}`.trim(),
+          name: `${clerkUser.firstName || ''} ${clerkUser.lastName || ''}`.trim() || 'User',
           avatar_url: clerkUser.imageUrl,
           created_at: clerkUser.createdAt?.toISOString() || new Date().toISOString(),
         }
@@ -33,5 +33,6 @@ export function useAuth() {
     user,
     isLoading: !isLoaded,
     isSignedIn,
+    clerkUser,
   }
 }

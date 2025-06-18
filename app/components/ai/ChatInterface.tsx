@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { Card, CardHeader, CardTitle, CardContent } from '@/app/components/ui/Card'
 import Button from '@/app/components/ui/Button'
 import Input from '@/app/components/ui/Input'
+import LoadingSpinner from '@/app/components/ui/LoadingSpinner'
 import { useAI } from '@/lib/hooks/useAI'
 import { Send, Bot, User } from 'lucide-react'
 
@@ -100,7 +101,7 @@ export default function ChatInterface() {
                     : 'bg-gray-100 text-gray-900'
                 }`}
               >
-                <p className="text-sm">{message.content}</p>
+                <p className="text-sm whitespace-pre-wrap">{message.content}</p>
               </div>
               
               {message.sender === 'user' && (
@@ -117,11 +118,7 @@ export default function ChatInterface() {
                 <Bot className="w-4 h-4 text-primary-600" />
               </div>
               <div className="bg-gray-100 rounded-lg px-4 py-2">
-                <div className="flex space-x-1">
-                  <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
-                  <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
-                  <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
-                </div>
+                <LoadingSpinner size="sm" />
               </div>
             </div>
           )}

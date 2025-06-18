@@ -11,7 +11,7 @@ interface CardProps {
 export function Card({ 
   children, 
   className, 
-  padding = 'md',
+  padding = 'none',
   shadow = 'md' 
 }: CardProps) {
   const paddingClasses = {

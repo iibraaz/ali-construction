@@ -1,13 +1,10 @@
-import { Metadata } from 'next'
+'use client'
+
 import AppLayout from '@/app/components/layout/AppLayout'
 import StatsCards from '@/app/components/dashboard/StatsCards'
 import RecentActivity from '@/app/components/dashboard/RecentActivity'
 import ProjectList from '@/app/components/projects/ProjectList'
-
-export const metadata: Metadata = {
-  title: 'Dashboard - Ali Construction',
-  description: 'Construction project management dashboard',
-}
+import ChatInterface from '@/app/components/ai/ChatInterface'
 
 export default function DashboardPage() {
   return (
@@ -20,15 +17,24 @@ export default function DashboardPage() {
 
         <StatsCards />
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <div>
-            <h2 className="text-lg font-semibold text-gray-900 mb-4">Recent Projects</h2>
-            <ProjectList limit={5} />
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <div className="lg:col-span-2 space-y-6">
+            <div>
+              <h2 className="text-lg font-semibold text-gray-900 mb-4">Recent Projects</h2>
+              <ProjectList limit={5} />
+            </div>
           </div>
           
-          <div>
-            <h2 className="text-lg font-semibold text-gray-900 mb-4">Recent Activity</h2>
-            <RecentActivity />
+          <div className="space-y-6">
+            <div>
+              <h2 className="text-lg font-semibold text-gray-900 mb-4">Recent Activity</h2>
+              <RecentActivity />
+            </div>
+            
+            <div>
+              <h2 className="text-lg font-semibold text-gray-900 mb-4">AI Assistant</h2>
+              <ChatInterface />
+            </div>
           </div>
         </div>
       </div>

@@ -24,14 +24,24 @@ export default function ProjectForm({
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmitting },
+    reset,
   } = useForm<CreateProject>({
     resolver: zodResolver(CreateProjectSchema),
     defaultValues: initialData,
   })
 
+  const handleFormSubmit = async (data: CreateProject) => {
+    try {
+      await onSubmit(data)
+      reset()
+    } catch (error) {
+      // Error handling is done in the hook
+    }
+  }
+
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+    <form onSubmit={handleSubmit(handleFormSubmit)} className="space-y-6">
       <FormField error={errors.name?.message}>
         <Input
           label="Project Name"
@@ -73,7 +83,7 @@ export default function ProjectForm({
             Cancel
           </Button>
         )}
-        <Button type="submit" loading={isLoading}>
+        <Button type="submit" loading={isSubmitting || isLoading}>
           {initialData ? 'Update Project' : 'Create Project'}
         </Button>
       </div>

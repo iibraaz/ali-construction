@@ -25,7 +25,8 @@ export default function TaskForm({
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmitting },
+    reset,
   } = useForm<CreateTask>({
     resolver: zodResolver(CreateTaskSchema),
     defaultValues: {
@@ -34,8 +35,17 @@ export default function TaskForm({
     },
   })
 
+  const handleFormSubmit = async (data: CreateTask) => {
+    try {
+      await onSubmit(data)
+      reset()
+    } catch (error) {
+      // Error handling is done in the hook
+    }
+  }
+
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+    <form onSubmit={handleSubmit(handleFormSubmit)} className="space-y-6">
       <FormField error={errors.title?.message}>
         <Input
           label="Task Title"
@@ -100,7 +110,7 @@ export default function TaskForm({
             Cancel
           </Button>
         )}
-        <Button type="submit" loading={isLoading}>
+        <Button type="submit" loading={isSubmitting || isLoading}>
           {initialData ? 'Update Task' : 'Create Task'}
         </Button>
       </div>
